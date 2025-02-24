@@ -19,13 +19,14 @@ function createBoard(puzzle) {
       cell.textContent = puzzle[i];
       cell.classList.add("fixed");
     } else {
-      cell.addEventListener("click", () => selectCell(cell));
+      cell.addEventListener("click", () => {
+        console.log("📌 셀 클릭됨:", i);
+        selectCell(cell);
+      });
     }
 
     board.appendChild(cell);
   }
-
-  console.log("✅ 그리드가 생성됨:", board.childNodes.length);
 }
 
 function selectCell(cell) {
@@ -35,26 +36,15 @@ function selectCell(cell) {
   selectedCell = cell;
   selectedCell.classList.add("selected");
 
-  highlightRelatedCells(selectedCell);
-}
-
-function highlightRelatedCells(cell) {
-  const index = parseInt(cell.dataset.index);
-  const row = Math.floor(index / 9);
-  const col = index % 9;
-
-  document.querySelectorAll(".cell").forEach((c, i) => {
-    c.classList.remove("highlight");
-    const r = Math.floor(i / 9);
-    const cl = i % 9;
-    if (r === row || cl === col) {
-      c.classList.add("highlight");
-    }
-  });
+  console.log("✅ selectCell() 실행됨! 선택된 셀:", selectedCell.dataset.index);
 }
 
 function getSelectedCell() {
+  console.log(
+    "🔍 getSelectedCell() 실행됨! 현재 selectedCell 값:",
+    selectedCell
+  );
   return selectedCell;
 }
 
-export { createBoard, selectCell, selectedCell, getSelectedCell };
+export { createBoard, selectCell, getSelectedCell };

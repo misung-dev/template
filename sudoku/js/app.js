@@ -1,8 +1,6 @@
 import { getRandomPuzzle } from "../data/puzzles.js";
 import { createBoard } from "./board.js";
-import { undoMove } from "./undo.js";
-import { deleteCell } from "./input.js";
-import { insertNumber } from "./input.js";
+import { undoMove, deleteCell, insertNumber } from "./input.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   resetBoard();
@@ -16,6 +14,7 @@ function attachEventListeners() {
 
   document.querySelectorAll(".num-btn").forEach((button) => {
     button.addEventListener("click", (e) => {
+      console.log("🔢 숫자 버튼 클릭됨:", e.target.dataset.num);
       insertNumber(e.target.dataset.num);
     });
   });
