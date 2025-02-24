@@ -1,0 +1,56 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#sudoku-board {
+  display: grid;
+  grid-template-columns: repeat(9, 50px);
+  grid-template-rows: repeat(9, 50px);
+  gap: 2px;
+  margin: 20px;
+}
+
+.cell {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #ccc;
+  text-align: center;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cell.selected {
+  background-color: lightblue;
+}
+
+.cell.invalid {
+  color: red;
+}
+
+.cell.fixed {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+#number-pad {
+  display: flex;
+  gap: 5px;
+}
+
+.num-btn {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+}
