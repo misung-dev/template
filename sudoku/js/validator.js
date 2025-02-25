@@ -1,31 +1,46 @@
 function validateBoard() {
-  document
-    .querySelectorAll(".cell")
-    .forEach((cell) => cell.classList.remove("invalid"));
+  document.querySelectorAll(".cell").forEach((cell) => {
+    cell.classList.remove("invalid");
+  });
+
+  let duplicateCells = new Set();
 
   document.querySelectorAll(".cell").forEach((cell) => {
     if (cell.textContent) {
       const index = parseInt(cell.dataset.index);
       const row = Math.floor(index / 9);
       const col = index % 9;
+      const value = cell.textContent;
 
-      if (isDuplicate(row, col, cell.textContent)) {
-        cell.classList.add("invalid");
-      }
+      const duplicates = findDuplicates(row, col, value, index);
+      duplicates.forEach((dupIndex) => duplicateCells.add(dupIndex));
     }
+  });
+
+  duplicateCells.forEach((index) => {
+    document
+      .querySelector(`.cell[data-index="${index}"]`)
+      .classList.add("invalid");
   });
 }
 
-function isDuplicate(row, col, value) {
-  return [...document.querySelectorAll(".cell")].some((cell, i) => {
+function findDuplicates(row, col, value, currentIndex) {
+  let duplicates = [];
+
+  document.querySelectorAll(".cell").forEach((cell, i) => {
     const r = Math.floor(i / 9);
-    const cIdx = i % 9;
-    return (
-      (r === row || cIdx === col || isSameBox(row, col, r, cIdx)) &&
+    const c = i % 9;
+
+    if (
+      (r === row || c === col || isSameBox(row, col, r, c)) &&
       cell.textContent === value &&
-      i !== row * 9 + col
-    );
+      i !== currentIndex
+    ) {
+      duplicates.push(i);
+    }
   });
+
+  return duplicates;
 }
 
 function isSameBox(row1, col1, row2, col2) {
