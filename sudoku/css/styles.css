@@ -86,3 +86,74 @@ body {
 .cell.invalid {
   color: red;
 }
+
+/* 기본 버튼 스타일 */
+button {
+  padding: 10px 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* 공통 버튼 스타일 */
+.action-btn {
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.action-btn:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+/* New Game, Undo, Delete 버튼 스타일 */
+#new-game {
+  background-color: #6fafe7;
+}
+
+#new-game:hover {
+  background-color: #4e9bd6;
+}
+
+#undo {
+  background-color: #ffd873;
+  color: #333;
+}
+
+#undo:hover {
+  background-color: #ffc554;
+}
+
+#delete {
+  background-color: #f58f98;
+}
+
+#delete:hover {
+  background-color: #e6767f;
+}
+
+/* 숫자 버튼 스타일 */
+#number-pad {
+  display: flex;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.num-btn {
+  width: 50px;
+  height: 50px;
+  font-size: 22px;
+  font-weight: bold;
+  background-color: #ecf0f1;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.num-btn:hover {
+  background-color: #bdc3c7;
+  transform: translateY(-2px);
+}
