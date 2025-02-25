@@ -1,5 +1,6 @@
 import { getSelectedCell } from "./board.js";
-import { validateBoard } from "./validator.js";
+import { validateBoard, isPuzzleComplete } from "./validator.js";
+import { showGameResult } from "./board.js"; // 메시지 표시 함수 추가
 
 let moveHistory = [];
 
@@ -8,21 +9,15 @@ function insertNumber(num) {
   console.log("📌 insertNumber() 실행됨! 숫자:", num);
 
   const selectedCell = getSelectedCell();
-  console.log("📌 getSelectedCell() 결과:", selectedCell);
-
   if (!selectedCell) {
-    console.warn(
-      "🚨 getSelectedCell() 결과가 null입니다! 먼저 셀을 선택하세요."
-    );
+    console.warn("🚨 먼저 셀을 선택하세요.");
     return;
   }
 
   if (selectedCell.classList.contains("fixed")) {
-    console.warn("🚨 fixed 상태의 셀에는 값을 입력할 수 없습니다.");
+    console.warn("🚨 고정된 셀에는 값을 입력할 수 없습니다.");
     return;
   }
-
-  console.log("✅ insertNumber() 내부 로직 실행!");
 
   moveHistory.push({
     cellIndex: selectedCell.dataset.index,
@@ -30,8 +25,14 @@ function insertNumber(num) {
   });
 
   selectedCell.textContent = num;
+
+  // 숫자 입력 후 전체 보드 검증
   validateBoard();
-  console.log("✅ moveHistory 업데이트됨:", moveHistory);
+
+  // 퍼즐이 완성되었는지 체크
+  if (isPuzzleComplete()) {
+    showGameResult(true);
+  }
 }
 
 // Undo 함수
@@ -63,14 +64,12 @@ function deleteCell() {
   const selectedCell = getSelectedCell();
 
   if (!selectedCell) {
-    console.warn(
-      "🚨 getSelectedCell() 결과가 null입니다! 먼저 셀을 선택하세요."
-    );
+    console.warn("🚨 먼저 셀을 선택하세요.");
     return;
   }
 
   if (selectedCell.classList.contains("fixed")) {
-    console.warn("🚨 fixed 상태의 셀에는 값을 삭제할 수 없습니다.");
+    console.warn("🚨 고정된 셀에는 값을 삭제할 수 없습니다.");
     return;
   }
 

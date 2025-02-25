@@ -50,4 +50,18 @@ function isSameBox(row1, col1, row2, col2) {
   );
 }
 
-export { validateBoard };
+function isPuzzleComplete() {
+  const emptyCells = document.querySelectorAll(".cell:empty");
+  if (emptyCells.length > 0) return false;
+
+  let hasError = false;
+  document.querySelectorAll(".cell").forEach((cell) => {
+    if (cell.classList.contains("invalid")) {
+      hasError = true;
+    }
+  });
+
+  return !hasError;
+}
+
+export { validateBoard, isPuzzleComplete };

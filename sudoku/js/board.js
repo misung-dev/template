@@ -76,4 +76,17 @@ function getSelectedCell() {
   return selectedCell;
 }
 
-export { createBoard, selectCell, getSelectedCell, clearHighlights };
+function showGameResult(isSuccess) {
+  const message = isSuccess
+    ? "🎉 성공적으로 해결했습니다!"
+    : "❌ 스도쿠에 오류가 있습니다!";
+  alert(message);
+}
+
+export {
+  createBoard,
+  selectCell,
+  getSelectedCell,
+  clearHighlights,
+  showGameResult,
+};
