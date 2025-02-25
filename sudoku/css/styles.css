@@ -75,7 +75,8 @@ body {
 }
 
 .cell.selected {
-  background-color: lightblue;
+  background-color: #81aef8;
+  color: white;
 }
 
 .cell.highlight {

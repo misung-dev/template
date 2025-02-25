@@ -50,15 +50,18 @@ function highlightRelatedCells(cell) {
   document.querySelectorAll(".cell").forEach((c, i) => {
     const r = Math.floor(i / 9);
     const cIdx = i % 9;
+
     if (r === row || cIdx === col || isSameBox(row, col, r, cIdx)) {
-      c.classList.add("highlight");
+      if (c !== selectedCell) {
+        c.classList.add("highlight");
+      }
     }
   });
 }
 
 function clearHighlights() {
   document.querySelectorAll(".cell").forEach((cell) => {
-    cell.classList.remove("highlight");
+    cell.classList.remove("highlight", "selected");
   });
 }
 
