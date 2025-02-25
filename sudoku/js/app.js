@@ -5,6 +5,7 @@ import { undoMove, deleteCell, insertNumber } from "./input.js";
 document.addEventListener("DOMContentLoaded", () => {
   resetBoard();
   attachEventListeners();
+  enableKeyboardInput();
 });
 
 function attachEventListeners() {
@@ -23,4 +24,13 @@ function attachEventListeners() {
 function resetBoard() {
   const puzzle = getRandomPuzzle();
   createBoard(puzzle);
+}
+
+function enableKeyboardInput() {
+  document.addEventListener("keydown", (event) => {
+    if (event.key >= "1" && event.key <= "9") {
+      console.log(`⌨️ 키 입력 감지: ${event.key}`);
+      insertNumber(event.key);
+    }
+  });
 }
