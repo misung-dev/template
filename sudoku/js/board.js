@@ -78,9 +78,10 @@ function getSelectedCell() {
 
 function showGameResult(isSuccess) {
   const message = isSuccess
-    ? "🎉 성공적으로 해결했습니다!"
-    : "❌ 스도쿠에 오류가 있습니다!";
-  alert(message);
+    ? "성공적으로 해결했습니다! 🎉"
+    : "스도쿠 규칙에 맞지 않는 숫자가 있습니다. 🥲";
+
+  setTimeout(() => alert(message), 100);
 }
 
 export {

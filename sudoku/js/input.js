@@ -31,7 +31,14 @@ function insertNumber(num) {
 
   // 퍼즐이 완성되었는지 체크
   if (isPuzzleComplete()) {
-    showGameResult(true);
+    showGameResult(true); // 퍼즐 성공 메시지
+  } else if (
+    ![...document.querySelectorAll(".cell")].some(
+      (cell) => cell.textContent.trim() === ""
+    )
+  ) {
+    // 빈칸이 없는데 퍼즐이 틀렸다면 실패 메시지 표시
+    showGameResult(false);
   }
 }
 
