@@ -73,3 +73,15 @@ body {
 .cell:nth-child(9n) {
   border-right: 2px solid #000;
 }
+
+.cell.selected {
+  background-color: lightblue;
+}
+
+.cell.highlight {
+  background-color: #dbeafe;
+}
+
+.cell.invalid {
+  color: red;
+}

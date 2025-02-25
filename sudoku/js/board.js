@@ -31,20 +31,46 @@ function createBoard(puzzle) {
 
 function selectCell(cell) {
   if (selectedCell) {
+    clearHighlights();
     selectedCell.classList.remove("selected");
   }
+
   selectedCell = cell;
   selectedCell.classList.add("selected");
+  highlightRelatedCells(selectedCell);
 
   console.log("✅ selectCell() 실행됨! 선택된 셀:", selectedCell.dataset.index);
 }
 
-function getSelectedCell() {
-  console.log(
-    "🔍 getSelectedCell() 실행됨! 현재 selectedCell 값:",
-    selectedCell
+function highlightRelatedCells(cell) {
+  const index = parseInt(cell.dataset.index);
+  const row = Math.floor(index / 9);
+  const col = index % 9;
+
+  document.querySelectorAll(".cell").forEach((c, i) => {
+    const r = Math.floor(i / 9);
+    const cIdx = i % 9;
+    if (r === row || cIdx === col || isSameBox(row, col, r, cIdx)) {
+      c.classList.add("highlight");
+    }
+  });
+}
+
+function clearHighlights() {
+  document.querySelectorAll(".cell").forEach((cell) => {
+    cell.classList.remove("highlight");
+  });
+}
+
+function isSameBox(row1, col1, row2, col2) {
+  return (
+    Math.floor(row1 / 3) === Math.floor(row2 / 3) &&
+    Math.floor(col1 / 3) === Math.floor(col2 / 3)
   );
+}
+
+function getSelectedCell() {
   return selectedCell;
 }
 
-export { createBoard, selectCell, getSelectedCell };
+export { createBoard, selectCell, getSelectedCell, clearHighlights };

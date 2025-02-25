@@ -8,6 +8,7 @@ function validateBoard() {
       const index = parseInt(cell.dataset.index);
       const row = Math.floor(index / 9);
       const col = index % 9;
+
       if (isDuplicate(row, col, cell.textContent)) {
         cell.classList.add("invalid");
       }
@@ -18,13 +19,20 @@ function validateBoard() {
 function isDuplicate(row, col, value) {
   return [...document.querySelectorAll(".cell")].some((cell, i) => {
     const r = Math.floor(i / 9);
-    const c = i % 9;
+    const cIdx = i % 9;
     return (
-      (r === row || c === col) &&
+      (r === row || cIdx === col || isSameBox(row, col, r, cIdx)) &&
       cell.textContent === value &&
       i !== row * 9 + col
     );
   });
+}
+
+function isSameBox(row1, col1, row2, col2) {
+  return (
+    Math.floor(row1 / 3) === Math.floor(row2 / 3) &&
+    Math.floor(col1 / 3) === Math.floor(col2 / 3)
+  );
 }
 
 export { validateBoard };
